@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from books.views import CategoryViewSet, BookLoanViewSet, BookViewSet
+from django.conf import settings
+from django.conf.urls.static import static
 
 router = DefaultRouter()
 router.register(r'categories', CategoryViewSet)
@@ -28,4 +30,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('apiv1/', include(router.urls)),
     path('apiv2/', include(router.urls)),
-]
+    path('apiv3/', include('filerest.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
